@@ -1,0 +1,110 @@
+<header id="header" class="header">
+    <div class="container-inner">
+        <div class="yusi-logo"><a href="/"><h1><span class="yusi-mono">欲思博客</span> <span class="yusi-bloger">– 关注前端和WordPress,分享福利和心得！</span>
+        </h1></a></div>
+    </div>
+    <div id="nav-header" class="navbar">
+        #menu()
+        <ul class="nav">
+            <li id="menu-item-3307"
+                class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-3307">
+                <a href="/">首页</a></li>
+            <li id="menu-item-3305" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3305">
+                <a href="https://yusi123.com/money">网赚</a></li>
+            <li id="menu-item-3300"
+                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3300">
+                <a href="https://yusi123.com/share">福利</a>
+                <ul class="sub-menu">
+                    <li id="menu-item-3301"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3301"><a
+                            href="https://yusi123.com/share/free">免费资源</a></li>
+                    <li id="menu-item-3302"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3302"><a
+                            href="https://yusi123.com/share/funweb">趣站推荐</a></li>
+                    <li id="menu-item-3303"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3303"><a
+                            href="https://yusi123.com/share/software">软件工具</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-3294"
+                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3294">
+                <a href="https://yusi123.com/web">建站</a>
+                <ul class="sub-menu">
+                    <li id="menu-item-3298"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3298"><a
+                            href="https://yusi123.com/web/seo">网站优化</a></li>
+                    <li id="menu-item-3297"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3297"><a
+                            href="https://yusi123.com/web/code">代码收藏</a></li>
+                    <li id="menu-item-3296"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3296"><a
+                            href="https://yusi123.com/web/webserver">Web服务器</a></li>
+                    <li id="menu-item-3295"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3295"><a
+                            href="https://yusi123.com/web/asp-net">asp.net</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-3291"
+                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3291">
+                <a href="https://yusi123.com/design">前端</a>
+                <ul class="sub-menu">
+                    <li id="menu-item-3292"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3292"><a
+                            href="https://yusi123.com/design/html5css3">Html5+CSS3</a></li>
+                    <li id="menu-item-3361"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3361"><a
+                            href="https://yusi123.com/design/javascript-jquery">Js+Jquery</a></li>
+                    <li id="menu-item-3293"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3293"><a
+                            href="https://yusi123.com/design/material">设计素材</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-3288"
+                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3288">
+                <a href="https://yusi123.com/wordpress">WordPress</a>
+                <ul class="sub-menu">
+                    <li id="menu-item-3290"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3290"><a
+                            href="https://yusi123.com/wordpress/tutorial">WP教程</a></li>
+                    <li id="menu-item-3289"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3289"><a
+                            href="https://yusi123.com/wordpress/plugin">WP插件</a></li>
+                    <li id="menu-item-3501"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3501"><a
+                            href="https://yusi123.com/wordpress/theme">WP主题</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-3306"
+                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3306">
+                <a href="https://yusi123.com/diary">随笔</a>
+                <ul class="sub-menu">
+                    <li id="menu-item-3304"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3304"><a
+                            href="https://yusi123.com/website">站长吐槽</a></li>
+                    <li id="menu-item-3299"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3299"><a
+                            href="https://yusi123.com/search">搜索引擎</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-3308" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3308"><a
+                    href="https://yusi123.com/guestbook">留言</a></li>
+            <li style="float:right;">
+                <div class="toggle-search"><i class="fa fa-search"></i></div>
+                <div class="search-expand" style="display: none;">
+                    <div class="search-expand-inner">
+                        <form method="get" class="searchform themeform"
+                              onsubmit="location.href='https://yusi123.com/search/' + encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;"
+                              action="https://yusi123.com/">
+                            <div><input type="ext" class="search" name="s"
+                                        onblur="if(this.value=='')this.value='search...';"
+                                        onfocus="if(this.value=='search...')this.value='';" value="search..."></div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="screen-mini">
+            <button data-type="screen-nav" class="btn btn-inverse screen-nav"><i class="fa fa-list"></i></button>
+        </div>
+    </div>
+</header>

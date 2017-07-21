@@ -1,0 +1,62 @@
+<div id="wowslider-container1" style="width: 100%;">
+</div>
+
+<script type="text/javascript" src="${request.contextPath}/js/jR3DCarousel/jR3DCarousel.min.js"></script>
+<script type="text/javascript">
+        $(function () {
+            var imgs = [];
+            for(var i = 0 ; i < 5; i ++){
+                imgs.push({src:"${request.contextPath}/img/box/45"+i+".jpg"});
+            }
+            $('#wowslider-container1').jR3DCarousel({
+                height:400,
+                slides: imgs
+            });
+        });
+</script>
+<div class="hot-posts"><h2 class="title">本周热门排行</h2>
+    <ul>
+        <li>None data.</li>
+    </ul>
+</div>
+
+<article class="excerpt">
+    <header><a class="label label-important" href="https://yusi123.com/web/webserver">Web服务器<i class="label-arrow"></i></a>
+        <h2><a target="_blank" href="https://yusi123.com/3831.html" title="Linux系统vi(vim)编辑器命令使用教程简单介绍">Linux系统vi(vim)编辑器命令使用教程简单介绍 </a>
+        </h2></header>
+    <div class="focus"><a target="_blank" href="https://yusi123.com/3831.html"><img class="thumb"
+                                                                                    src="https://yusi123.com/wp-content/themes/yusi/timthumb.php?src=https://yusi123.com/wp-content/uploads/2017/05/36621042303131.jpg&amp;h=123&amp;w=200&amp;q=90&amp;zc=1&amp;ct=1"
+                                                                                    alt="Linux系统vi(vim)编辑器命令使用教程简单介绍"></a>
+    </div>
+    <span class="note"> vi(vim)是上Linux非常常用的代码编辑器，很多Linux发行版都默认安装了vi(vim)。vi(vim)命令繁多但是如果使用灵活之后将会大大提高效率。vi是“visual interface”的缩写，vim是vi IMproved(增强版的vi)。在一般的系统管理维护中v...</span>
+    <p class="auth-span"><span class="muted"><i class="fa fa-clock-o"></i> 1个月前 (05-31)</span> <span class="muted"><i
+            class="fa fa-eye"></i> 919℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank"
+                                                                                                       href="https://yusi123.com/3831.html#comments">7评论</a></span><span
+            class="muted"> <a href="javascript:;" data-action="ding" data-id="3831" id="Addlike" class="action"><i
+            class="fa fa-heart-o"></i><span class="count">21</span>喜欢</a></span></p></article>
+<article class="excerpt">
+    <header><a class="label label-important" href="https://yusi123.com/web/webserver">Web服务器<i class="label-arrow"></i></a>
+        <h2><a target="_blank" href="https://yusi123.com/3829.html" title="Linux系统 Crontab命令 安装配置使用详细说明">Linux系统
+            Crontab命令 安装配置使用详细说明 </a></h2></header>
+    <div class="focus"><a target="_blank" href="https://yusi123.com/3829.html"><img class="thumb"
+                                                                                    src="https://yusi123.com/wp-content/themes/yusi/timthumb.php?src=http://images.yusi123.com/wp-content/uploads/2017/05/kcFpx34.png&amp;h=123&amp;w=200&amp;q=90&amp;zc=1&amp;ct=1"
+                                                                                    alt="Linux系统 Crontab命令 安装配置使用详细说明"></a>
+    </div>
+    <span class="note"> Crontab命令常见于Unix和Linux的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。通常，crontab储存的指令被守护进程激活。crond 常常在后台运行，每一分钟检查是否有预定的作业需...</span>
+    <p class="auth-span"><span class="muted"><i class="fa fa-clock-o"></i> 1个月前 (05-29)</span> <span class="muted"><i
+            class="fa fa-eye"></i> 561℃</span> <span class="muted"><i class="fa fa-comments-o"></i> <a target="_blank"
+                                                                                                       href="https://yusi123.com/3829.html#comments">2评论</a></span><span
+            class="muted"> <a href="javascript:;" data-action="ding" data-id="3829" id="Addlike" class="action"><i
+            class="fa fa-heart-o"></i><span class="count">10</span>喜欢</a></span></p></article>
+<div class="pagination">
+    <ul>
+        <li class="prev-page"></li>
+        <li class="active"><span>1</span></li>
+        <li><a href="https://yusi123.com/page/2">2</a></li>
+        <li><a href="https://yusi123.com/page/3">3</a></li>
+        <li><a href="https://yusi123.com/page/4">4</a></li>
+        <li><a href="https://yusi123.com/page/5">5</a></li>
+        <li><span> ... </span></li>
+        <li class="next-page"><a href="https://yusi123.com/page/2">下一页</a></li>
+    </ul>
+</div>

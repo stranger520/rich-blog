@@ -1,0 +1,8 @@
+<div class="widget d_subscribe">
+    <div class="title"><h2>邮件订阅</h2></div>
+    <form action="http://list.qq.com/cgi-bin/qf_compose_send" target="_blank" method="post"><p>填写您的邮件地址，订阅更多的精彩内容：</p>
+        <input type="hidden" name="t" value="qf_booked_feedback"><input type="hidden" name="id"
+                                                                        value="55de1906a6c38440856581343616feb803dc76d6413d684e"><input
+                type="email" name="to" class="rsstxt" placeholder="your@email.com" value="" required=""><input
+                type="submit" class="rssbutton" value="订阅"></form>
+</div>

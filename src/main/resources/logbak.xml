@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <contextName>rich-blog</contextName>
+    <property name="LOG_PATH" value="./log" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5p %c{1}:%L - %m%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5p %c{1}:%L - %m%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.zuicoding.platform" level="INFO">
+        <!--<appender-ref ref="STDOUT" />-->
+    </logger>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

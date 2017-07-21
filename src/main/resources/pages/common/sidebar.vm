@@ -1,0 +1,4 @@
+##右边
+<aside class="sidebar">
+    #parse("pages/common/d_widget_text.vm")
+</aside>
