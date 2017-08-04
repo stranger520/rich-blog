@@ -1,0 +1,44 @@
+#set($layout="pages/layout/layout_bank.vm")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="${request.contextPath}/style/admin-login.css"/>
+
+    <script type="text/javascript" src="${request.contextPath}/js/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="text-center">Welcome</h1>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" class="form-control input-lg" placeholder="Username"/>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control input-lg" placeholder="Password"/>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login"/>
+##                <span class="pull-right"><a href="#">Register</a></span><span><a href="#">Forgot Password</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

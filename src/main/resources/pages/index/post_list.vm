@@ -1,0 +1,45 @@
+#set($layout  = 'pages/layout/layout_bank.vm')
+#foreach($post in $!posts)
+<article class="excerpt">
+    <header>
+        <a class="label label-important" href="https://yusi123.com/web/webserver">$!post.postMimeType<i class="label-arrow"></i></a>
+        <h2><a target="_blank" href="https://yusi123.com/3831.html" title="$!post.title">"$!post.title </a> </h2>
+    </header>
+    <div class="focus">
+        <a target="_blank" href="${request.contextPath}/blog/${post.id}.html">
+            <img class="thumb" src="" alt="$!post.title" />
+        </a>
+    </div>
+    <span class="note">$!post.postExcerpt</span>
+    <p class="auth-span">
+            <span class="muted">
+                <i class="fa fa-clock-o"></i> 1个月前 (05-31)
+            </span>
+        <span class="muted"><i class="fa fa-eye"></i> $!post.browseCount ℃</span>
+        <span class="muted">
+                <i class="fa fa-comments-o"></i>
+                <a target="_blank" href="https://yusi123.com/3831.html#comments">${post.commentCount}评论</a>
+            </span>
+        <span class="muted">
+                <a href="javascript:void(0);" data-action="ding" data-id="3831" id="Addlike" class="action">
+                <i class="fa fa-heart-o"></i>
+                    <span class="count">$!post.likeCount</span>喜欢
+                </a>
+            </span>
+    </p>
+</article>
+#end
+
+<div class="pagination">
+    <ul>
+        <li class="prev-page"></li>
+        <li class="active"><span>1</span></li>
+        <li><a href="javascript:query(2);">2</a></li>
+        <li><a href="javascript:query(3);">3</a></li>
+        <li><a href="javascript:query(4);">4</a></li>
+        <li><a href="javascript:query(5);">5</a></li>
+        <li><span> ... </span></li>
+        <li class="next-page"><a href="javascript:query(2);">下一页</a></li>
+    </ul>
+</div>
+

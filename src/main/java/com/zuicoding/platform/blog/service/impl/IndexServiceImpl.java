@@ -20,6 +20,9 @@ public class IndexServiceImpl implements IIndexService {
     private WpPostMapper wpPostMapper;
     @Override
     public List<WpPost> selectPosts() {
-        return wpPostMapper.selectAll();
+
+        return null;
     }
+
+
 }

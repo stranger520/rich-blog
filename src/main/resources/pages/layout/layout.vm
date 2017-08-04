@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="content-wrap">
-        <div class="content">
+        <div class="content" id="content-box">
             $screen_content
         </div>
     </div>

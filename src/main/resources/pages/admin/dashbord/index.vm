@@ -1,0 +1,64 @@
+#set($layout = "pages/layout/layout_admin.vm")
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">概览</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6">$!dashbord.postCount 篇文章</div>
+                    <div class="col-xs-6">$!dashbord.commentCount 条评论</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">$!dashbord.appCommentCount 条评论待审核</div>
+                    <div class="col-xs-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">快速草稿</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="title" placeholder="标题">
+                    </div>
+                    <div class="form-group">
+                       <textarea rows="5" style="width: 100%" class="form-control" placeholder="你在想些什么?"></textarea>
+                    </div>
+                    <input type="button" class="btn btn-primary" value="保存草稿">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">最新发布</div>
+            <div class="panel-body">
+                <table class="table">
+                   #foreach($post in $!dashbord.posts)
+                        <tr>
+                            <td>$!date.format("yyyy-MM-dd HH:mm:ss",$!post.postDate)</td>
+                            <td>$!post.title</td>
+                        </tr>
+                   #end
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">近期评论</div>
+            <div class="panel-body">
+                #foreach($!comment in $!dashbord.comments)
+                    <div class="row">
+                        <div class="col-xs-12">$!comment.commentContent</div>
+                    </div>
+                #end
+            </div>
+        </div>
+    </div>
+</div>
