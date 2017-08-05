@@ -39,7 +39,7 @@ public class PostServiceImpl implements IPostService {
             return null;
         }
 
-        List<WpPost> list = wpPostMapper.selectListWithPage(pager,current);
+        List<WpPost> list = wpPostMapper.selectListWithPage(pager,current,null);
         pager.setTotal(count);
 
         return list;

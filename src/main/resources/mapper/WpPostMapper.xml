@@ -397,9 +397,7 @@
       <if test="userId != null">
           AND post_author = #{userId}
       </if>
-
-      LIMIT ${pager.offset,pager.pageSize}
-      ORDER BY post_date DESC
+      ORDER BY post_date DESC LIMIT ${pager.offset,pager.pageSize}
 
   </select>
   <select id="selectCountWithPage" resultType="java.lang.Integer"
