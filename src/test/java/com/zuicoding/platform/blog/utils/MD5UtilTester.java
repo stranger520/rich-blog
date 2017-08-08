@@ -12,6 +12,6 @@ public class MD5UtilTester {
 
     @Test
     public void test() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        System.err.println(MD5Util.EncoderByMd5("123"));
+        System.err.println(MD5Util.EncoderByMd5("123456"));
     }
 }
