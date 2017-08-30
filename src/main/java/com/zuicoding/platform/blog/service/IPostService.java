@@ -25,4 +25,6 @@ public interface IPostService {
      * @return
      */
     WpPostWithBLOBs selectPost(int id);
+
+    boolean createOrUpdate(WpPostWithBLOBs post);
 }

@@ -7,12 +7,12 @@
             </li>
 
             <li>
-                <a class="active-menu" href="index.html"><i class="fa fa-pencil"></i>发布文章</a>
+                <a role="deploy-article"  class="" href="${request.contextPath}/article/index.html"><i class="fa fa-pencil"></i>发布文章</a>
             </li>
             <li>
-                <a class="active-menu" href="index.html"><i class="fa fa-list-ol"></i>文章管理</a>
+                <a  href="index.html"><i class="fa fa-list-ol"></i>文章管理</a>
             </li>
-            <li role="parent">
+            <li>
                 <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li>
@@ -49,17 +49,25 @@
 </nav>
 
 <script type="text/javascript">
+    _EFFECT_MENU_ROLE_ = "";
+
+    function openChildren($parent) {
+            $parent.addClass("active");
+            $parent.children("ul").show(200);
+    }
+    function closeChildren($parent) {
+            $parent.children("ul").hide(200);
+            $parent.removeClass("active");
+    }
     $(function () {
-//        $("#main-menu li:not([role])").click(function () {
-//
-//        });
+
+        $("#main-menu a").removeClass("active-menu");
+        $("#main-menu a[role='"+_EFFECT_MENU_ROLE_+"']").attr("class","active-menu");
         $("#main-menu li[role]").click(function () {
             if($(this).hasClass("active")){
-                $(this).children("ul").hide(200);
-                $(this).removeClass("active");
+               closeChildren($(this));
             }else{
-                $(this).addClass("active");
-                $(this).children("ul").show(200);
+                openChildren($(this));
             }
 
         });

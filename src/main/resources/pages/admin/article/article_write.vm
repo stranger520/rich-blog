@@ -1,0 +1,43 @@
+#set($layout = "pages/layout/layout_admin.vm")
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/style/editermd/editormd.min.css">
+<script type="text/javascript" src="${request.contextPath}/js/editermd/editormd.min.js"></script>
+<div class="btn-group" style="float: right;margin-bottom: 0.5em;">
+    <button type="button" class="btn btn-info">保存草稿</button>
+    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li onclick="select(this,0,'保存草稿');"><a href="#" >保存草稿</a></li>
+        <li onclick="select(this,1,'发布文章');"><a href="#" >发布文章</a></li>
+    </ul>
+</div>
+
+<div id="editormd">
+    <textarea id="editormd-value" style="display: none;"></textarea>
+</div>
+<script type="text/javascript">
+    _EFFECT_MENU_ROLE_ = "deploy-article";
+    var editorMd;
+    function select(obj,status,text) {
+        $(obj).parent().prev().prev().text(text).data("status",status);
+    }
+    $(function() {
+        editorMd = editormd("editormd", {
+            width   : "100%",
+            height  : 640,
+            toolbarIcons:["undo", "redo", "|",
+                "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                "list-ul", "list-ol", "hr", "|",
+                "link", "reference-link", "code", "preformatted-text", "code-block", "table", "datetime", "pagebreak", "|",
+                "watch", "preview",  "clear", "search"],
+            path:"${request.contextPath}/js/editermd/lib/",
+            saveHTMLToTextarea:true
+        });
+    });
+
+    function save(obj) {
+        var status = $(obj).data("status");
+    }
+</script>

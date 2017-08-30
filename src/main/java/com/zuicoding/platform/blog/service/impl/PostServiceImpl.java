@@ -45,6 +45,13 @@ public class PostServiceImpl implements IPostService {
         return list;
     }
 
+    public boolean createOrUpdate(WpPostWithBLOBs post){
+        if (post.getId() == null || post.getId() == 0){
+            return wpPostMapper.insertSelective(post) > 0;
+        }
+        return wpPostMapper.updateByPrimaryKeyWithBLOBs( post) > 0;
+    }
+
     @Override
     public WpPostWithBLOBs selectPost(int id) {
         return null;
