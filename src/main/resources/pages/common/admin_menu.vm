@@ -1,0 +1,67 @@
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> 仪表盘</a>
+            </li>
+
+            <li>
+                <a class="active-menu" href="index.html"><i class="fa fa-pencil"></i>发布文章</a>
+            </li>
+            <li>
+                <a class="active-menu" href="index.html"><i class="fa fa-list-ol"></i>文章管理</a>
+            </li>
+            <li role="parent">
+                <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="#">Second Level Link</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Level Link</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level collapse">
+                            <li>
+                                <a href="#">Third Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level Link</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+            </li>
+        </ul>
+
+    </div>
+
+</nav>
+
+<script type="text/javascript">
+    $(function () {
+//        $("#main-menu li:not([role])").click(function () {
+//
+//        });
+        $("#main-menu li[role]").click(function () {
+            if($(this).hasClass("active")){
+                $(this).children("ul").hide(200);
+                $(this).removeClass("active");
+            }else{
+                $(this).addClass("active");
+                $(this).children("ul").show(200);
+            }
+
+        });
+    });
+</script>
