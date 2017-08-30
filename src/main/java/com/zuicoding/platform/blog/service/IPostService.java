@@ -26,5 +26,5 @@ public interface IPostService {
      */
     WpPostWithBLOBs selectPost(int id);
 
-    boolean createOrUpdate(WpPostWithBLOBs post);
+    long createOrUpdate(WpPostWithBLOBs post);
 }

@@ -8,6 +8,7 @@ import com.zuicoding.platform.blog.service.IPostService;
 import com.zuicoding.platform.blog.utils.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -45,11 +46,15 @@ public class PostServiceImpl implements IPostService {
         return list;
     }
 
-    public boolean createOrUpdate(WpPostWithBLOBs post){
+    @Transactional
+    public long createOrUpdate(WpPostWithBLOBs post){
+        post.setPostModified(new Date());
         if (post.getId() == null || post.getId() == 0){
-            return wpPostMapper.insertSelective(post) > 0;
+            wpPostMapper.insertSelective(post) ;
+            return post.getId();
         }
-        return wpPostMapper.updateByPrimaryKeyWithBLOBs( post) > 0;
+        wpPostMapper.updateByPrimaryKeyWithBLOBs( post);
+        return post.getId();
     }
 
     @Override

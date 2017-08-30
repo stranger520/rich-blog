@@ -1,24 +1,33 @@
 #set($layout = "pages/layout/layout_admin.vm")
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/style/editermd/editormd.min.css">
 <script type="text/javascript" src="${request.contextPath}/js/editermd/editormd.min.js"></script>
-<div class="btn-group" style="float: right;margin-bottom: 0.5em;">
-    <button type="button" class="btn btn-info">保存草稿</button>
-    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu">
-        <li onclick="select(this,0,'保存草稿');"><a href="#" >保存草稿</a></li>
-        <li onclick="select(this,1,'发布文章');"><a href="#" >发布文章</a></li>
-    </ul>
-</div>
-
+<form id="form" class="form-horizontal">
+    <div  class="form-group">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" placeholder="title" name="postTitle">
+        </div>
+        <div class="btn-group col-sm-2" style="float: right;margin-bottom: 0.5em;">
+            <button type="button" class="btn btn-info" id="saveBtn">保存草稿</button>
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li onclick="select(this,0,'保存草稿');"><a href="#" >保存草稿</a></li>
+                <li onclick="select(this,1,'发布文章');"><a href="#" >发布文章</a></li>
+            </ul>
+        </div>
+    </div>
 <div id="editormd">
-    <textarea id="editormd-value" style="display: none;"></textarea>
+    <textarea name="postExcerpt" id="editormd-doc" style="display: none;"></textarea>
+    <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+    <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
+    <textarea class="editormd-html-textarea" name="postContent" id="editorHtml"></textarea>
 </div>
+</form>
 <script type="text/javascript">
     _EFFECT_MENU_ROLE_ = "deploy-article";
-    var editorMd;
+    var editorMd,postId = null;
     function select(obj,status,text) {
         $(obj).parent().prev().prev().text(text).data("status",status);
     }
@@ -35,9 +44,42 @@
             path:"${request.contextPath}/js/editermd/lib/",
             saveHTMLToTextarea:true
         });
+        
+        $("#saveBtn").click(function () {
+            save($(this));
+        });
     });
 
     function save(obj) {
         var status = $(obj).data("status");
+        var statusText = "draft";
+        switch (status){
+            case 0:
+                break;
+            case 1:
+                statusText = "publish";
+                break;
+        }
+        ajaxFun(statusText);
+        
+    }
+    function ajaxFun(text) {
+        $.ajax({
+            url:"${request.contextPath}/article/create.json",
+            type:"POST",
+            dataType:"json",
+            data:{
+                id:postId,
+                postExcerpt:$("#editormd-doc").val(),
+                postContent:$("#editorHtml").val(),
+                postTitle:$("#title").val(),
+                postStatus:text
+
+            },
+            success:function (result) {
+                debugger;
+                postId = result ? (result.data ? result.data : null) : null;
+            }
+        });
     }
 </script>
