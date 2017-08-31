@@ -5,7 +5,6 @@ import com.zuicoding.platform.blog.core.plugin.dialect.IDialect;
 import com.zuicoding.platform.blog.utils.LogUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.builder.StaticSqlSource;
-import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.mapping.BoundSql;
