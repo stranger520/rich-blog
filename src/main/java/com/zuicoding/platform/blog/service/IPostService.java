@@ -27,4 +27,6 @@ public interface IPostService {
     WpPostWithBLOBs selectPost(int id);
 
     long createOrUpdate(WpPostWithBLOBs post);
+
+    List<WpPost> selectPostByPager(Pager pager,WpPost post);
 }

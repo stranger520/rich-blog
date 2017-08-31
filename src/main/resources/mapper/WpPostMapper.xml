@@ -416,4 +416,64 @@
     <select id="selectPostCount" resultType="int" parameterType="int">
         SELECT count(id) FROM wp_post WHERE post_author = #{userId}
     </select>
+
+    <select id="selectListByPager" parameterType="com.zuicoding.platform.blog.modal.WpPost"
+            resultMap="BaseResultMap">
+          SELECT <include refid="Base_Column_List"/> FROM wp_post
+        <where>
+            <if test="postAuthor != null">
+                post_author = #{postAuthor,jdbcType=BIGINT}
+            </if>
+            <if test="postDate != null">
+                AND post_date = #{postDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="postDateGmt != null">
+                AND  post_date_gmt = #{postDateGmt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="postStatus != null and postStatus != ''">
+                AND post_status = #{postStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="commentStatus != null">
+                AND comment_status = #{commentStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="pingStatus != null">
+                AND ping_status = #{pingStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="postPassword != null">
+                AND post_password = #{postPassword,jdbcType=VARCHAR}
+            </if>
+            <if test="postName != null">
+                AND post_name = #{postName,jdbcType=VARCHAR}
+            </if>
+            <if test="postModified != null">
+                AND post_modified = #{postModified,jdbcType=TIMESTAMP}
+            </if>
+            <if test="postModifiedGmt != null">
+                AND  post_modified_gmt = #{postModifiedGmt,jdbcType=TIMESTAMP}
+            </if>
+            <if test="postParentId != null">
+                AND  post_parent_id = #{postParentId,jdbcType=BIGINT}
+            </if>
+            <if test="guid != null">
+                AND  guid = #{guid,jdbcType=VARCHAR}
+            </if>
+            <if test="menuOrder != null">
+                AND  menu_order = #{menuOrder,jdbcType=INTEGER}
+            </if>
+            <if test="postType != null">
+                AND post_type = #{postType,jdbcType=VARCHAR}
+            </if>
+            <if test="postMimeType != null">
+                AND post_mime_type = #{postMimeType,jdbcType=VARCHAR}
+            </if>
+            <if test="commentCount != null">
+                AND comment_count = #{commentCount,jdbcType=BIGINT}
+            </if>
+            <if test="postTitle != null and postTitle != ''">
+                AND post_title LIKE concat('%',#{postTitle,jdbcType=LONGVARCHAR},'%')
+            </if>
+        </where>
+
+
+    </select>
 </mapper>

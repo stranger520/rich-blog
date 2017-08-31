@@ -16,4 +16,10 @@
         <!--查询超时时间-->
         <setting name="defaultStatementTimeout" value="60"/>
     </settings>
+    <plugins>
+        <plugin interceptor="com.zuicoding.platform.blog.core.plugin.PageHelper">
+            <property name="pageSize" value="10"/>
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
 </configuration>

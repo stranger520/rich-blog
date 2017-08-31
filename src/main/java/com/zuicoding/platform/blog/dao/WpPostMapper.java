@@ -78,4 +78,6 @@ public interface WpPostMapper {
      * @return
      */
     int selectPostCount(int userId);
+
+    List<WpPost> selectListByPager(WpPost post);
 }

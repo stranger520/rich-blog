@@ -10,7 +10,7 @@
                 <a role="deploy-article"  class="" href="${request.contextPath}/article/index.html"><i class="fa fa-pencil"></i>发布文章</a>
             </li>
             <li>
-                <a  href="index.html"><i class="fa fa-list-ol"></i>文章管理</a>
+                <a  href="${request.contextPath}/article/list.html"><i class="fa fa-list-ol"></i>文章管理</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -60,6 +60,14 @@
             $parent.removeClass("active");
     }
     $(function () {
+
+        $.ajaxSetup({
+            success:function (result) {
+                if (result == "loginOut"){
+                    window.location.reload();
+                }
+            }
+        });
 
         $("#main-menu a").removeClass("active-menu");
         $("#main-menu a[role='"+_EFFECT_MENU_ROLE_+"']").attr("class","active-menu");

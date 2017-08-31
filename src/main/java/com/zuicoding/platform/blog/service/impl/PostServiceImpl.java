@@ -1,9 +1,12 @@
 package com.zuicoding.platform.blog.service.impl;
 
 import com.zuicoding.platform.blog.base.Pager;
+import com.zuicoding.platform.blog.core.UserHolder;
+import com.zuicoding.platform.blog.core.plugin.PageHelper;
 import com.zuicoding.platform.blog.dao.WpPostMapper;
 import com.zuicoding.platform.blog.modal.WpPost;
 import com.zuicoding.platform.blog.modal.WpPostWithBLOBs;
+import com.zuicoding.platform.blog.modal.WpUser;
 import com.zuicoding.platform.blog.service.IPostService;
 import com.zuicoding.platform.blog.utils.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,12 +56,19 @@ public class PostServiceImpl implements IPostService {
             wpPostMapper.insertSelective(post) ;
             return post.getId();
         }
-        wpPostMapper.updateByPrimaryKeyWithBLOBs( post);
+        wpPostMapper.updateByPrimaryKeySelective( post);
         return post.getId();
     }
 
     @Override
     public WpPostWithBLOBs selectPost(int id) {
         return null;
+    }
+
+    public List<WpPost> selectPostByPager(Pager pager,WpPost post){
+        PageHelper.pageStart(pager);
+        List<WpPost> list =  wpPostMapper.selectListByPager(post);
+        PageHelper.pageEnd();
+        return list;
     }
 }
