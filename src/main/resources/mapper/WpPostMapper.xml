@@ -476,4 +476,8 @@
 
 
     </select>
+
+    <select id="selectCountTester" resultType="int">
+        SELECT COUNT(1) FROM wp_post
+    </select>
 </mapper>

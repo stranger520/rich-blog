@@ -14,7 +14,7 @@ public interface IDialect {
     /**
      * default implement
      */
-    public static enum DialectType implements IDialect{
+    public static enum DefaultDialect implements IDialect{
 
         MYSQL{
             @Override

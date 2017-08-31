@@ -6,15 +6,13 @@ import com.zuicoding.platform.blog.utils.LogUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.builder.StaticSqlSource;
 import org.apache.ibatis.executor.Executor;
-import org.apache.ibatis.executor.result.DefaultResultHandler;
-import org.apache.ibatis.mapping.BoundSql;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.SqlCommandType;
-import org.apache.ibatis.mapping.SqlSource;
+import org.apache.ibatis.mapping.*;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -30,8 +28,13 @@ import java.util.Properties;
 public class PageHelper implements Interceptor {
 
     private LogUtil log = LogUtil.newLogUtil(PageHelper.class);
+
     public static final ThreadLocal<Pager> localPage = new ThreadLocal<Pager>();
+
     private IDialect dialect;
+    private static final List<ResultMap> COUNT_RESULTMAPS = new ArrayList<>(1);
+
+    private static final String COUNT_SQL_SUFFIX = "-SELECT-COUNT";
 
     /**
      * 以此方法名字结尾的查询
@@ -86,6 +89,13 @@ public class PageHelper implements Interceptor {
         }
         //有些查询不需要查询总数
         if (countSql != null && !"".equals(countSql.trim())){
+
+            if (COUNT_RESULTMAPS.size() == 0){
+                COUNT_RESULTMAPS.add(new ResultMap.Builder(ms.getConfiguration(),
+                        ms.getId()+COUNT_SQL_SUFFIX,Integer.class,
+                        Collections.<ResultMapping>emptyList()).build());
+            }
+
             //构建 count bound sql
             BoundSql countBoundSql = new BoundSql(ms.getConfiguration(),
                     countSql,originSql.getParameterMappings(),
@@ -93,13 +103,13 @@ public class PageHelper implements Interceptor {
 
             Executor executor = (Executor) invocation.getTarget();
             //构建 count MappedStatement
-            MappedStatement countMs = reBuildMappedStatement(ms,countBoundSql);
-            List cursor = executor.query(countMs,parameter,RowBounds.DEFAULT,new DefaultResultHandler());
-//            if (list!=null && !list.isEmpty()){
-//
-//            }
-            //int total = cursor.iterator().next();
-            //pager.setTotal(total);
+            MappedStatement countMs = reBuildMappedStatement(ms,countBoundSql,true);
+            List<Integer> list = executor.query(countMs,parameter,RowBounds.DEFAULT,null);
+            if (list!=null && !list.isEmpty()){
+                int total = list.get(0);
+                pager.setTotal(total);
+            }
+
         }
 
         String limitSql = this.dialect.buildPaginationSql(originSql.getSql(),pager.getOffset(),pager.getPageSize());
@@ -109,7 +119,7 @@ public class PageHelper implements Interceptor {
         BoundSql limitBoundSql = new BoundSql(ms.getConfiguration(),
                 limitSql,originSql.getParameterMappings(),originSql.getParameterObject());
 
-        MappedStatement newMs = reBuildMappedStatement(ms,limitBoundSql);
+        MappedStatement newMs = reBuildMappedStatement(ms,limitBoundSql,false);
 
         invocation.getArgs()[0] = newMs;
         log.i(" reBuild limit sql finished...");
@@ -119,34 +129,47 @@ public class PageHelper implements Interceptor {
     /**
      * 构造新的MappedStatement 对象
      * @param ms
-     * @param sqlSource
+     * @param newBoundSql
+     * @param isCount
      * @return
      */
-    private MappedStatement reBuildMappedStatement(MappedStatement ms, SqlSource sqlSource){
-        MappedStatement.Builder builder = new MappedStatement.Builder(ms.getConfiguration(), ms.getId(),
-                sqlSource, ms.getSqlCommandType());
+    private MappedStatement reBuildMappedStatement(MappedStatement ms,
+                                                   BoundSql newBoundSql,boolean isCount){
+        String id = ms.getId();
+        if (isCount){
+            id += COUNT_SQL_SUFFIX;
+        }
+        if (log.isDebugEnabled()){
+            log.d("sql id is:{}",id);
+        }
+        MappedStatement.Builder builder = new MappedStatement.Builder(ms.getConfiguration(),
+                id,
+                new StaticSqlSource(ms.getConfiguration(),
+                        newBoundSql.getSql(),newBoundSql.getParameterMappings()), ms.getSqlCommandType());
         builder.resource(ms.getResource());
         builder.fetchSize(ms.getFetchSize());
         builder.statementType(ms.getStatementType());
         builder.keyGenerator(ms.getKeyGenerator());
-        // builder.keyProperty(ms.getKeyProperty());
         if (ms.getKeyProperties() != null){
             builder.keyProperty(StringUtils.join(ms.getKeyProperties(),","));
         }
         builder.timeout(ms.getTimeout());
         builder.parameterMap(ms.getParameterMap());
-        builder.resultMaps(ms.getResultMaps());
+
         builder.resultSetType(ms.getResultSetType());
         builder.cache(ms.getCache());
         builder.flushCacheRequired(ms.isFlushCacheRequired());
         builder.useCache(ms.isUseCache());
+        builder.resultMaps(ms.getResultMaps());
+        //如果是构建 count mappedStatement,将 查询 count result map 设置进去
+        if (isCount){
+            builder.resultMaps(COUNT_RESULTMAPS);
+
+        }
+
         return builder.build();
     }
 
-    private MappedStatement reBuildMappedStatement(MappedStatement ms, BoundSql newBoundSql){
-        return reBuildMappedStatement(ms,new StaticSqlSource(ms.getConfiguration(),
-                newBoundSql.getSql(),newBoundSql.getParameterMappings()));
-    }
 
     @Override
     public Object plugin(Object target) {
@@ -163,9 +186,11 @@ public class PageHelper implements Interceptor {
         }
         this.methodSuffix = properties.getProperty("methodSuffix",this.methodSuffix);
         String dialect = properties.getProperty("dialect");
-        IDialect.DialectType type = IDialect.DialectType.valueOf(dialect.toUpperCase());
-        if (type == null) throw new IllegalArgumentException("Undefined dialect " + dialect);
-        this.dialect = type;
+
+        IDialect.DefaultDialect defaultDialect = IDialect.DefaultDialect.valueOf(dialect.toUpperCase());
+
+        if (defaultDialect == null) throw new IllegalArgumentException("Undefined dialect " + dialect);
+        this.dialect = defaultDialect;
         log.i(" init properties finished, dialect value is : {},methodSuffix",dialect,methodSuffix);
     }
 
