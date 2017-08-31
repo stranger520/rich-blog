@@ -80,4 +80,6 @@ public interface WpPostMapper {
     int selectPostCount(int userId);
 
     List<WpPost> selectListByPager(WpPost post);
+
+    int selectCountTester();
 }
