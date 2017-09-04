@@ -70,6 +70,6 @@ public class PostServiceImpl implements IPostService {
         List<WpPost> list =  wpPostMapper.selectListByPager(post);
         //wpPostMapper.selectCountTester();
         PageHelper.pageEnd();
-        return null;
+        return list;
     }
 }

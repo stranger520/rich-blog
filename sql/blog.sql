@@ -73,11 +73,11 @@ CREATE TABLE IF NOT EXISTS `wp_postmeta` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 COMMENT '用于保存文章的元信息(meta)的表。文章额外数据表，例如文章浏览次数，文章的自定义字段等都存储在这里';
 
 
-CREATE TABLE IF NOT EXISTS `wp_post` (
+CREATE TABLE `wp_post` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `post_author` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '每篇文章的作者的编号，int(4)值，应该对应的是wp_users.ID',
-  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT ' 每篇文章发表的时间，datetime值。它是GMT时间加上时区偏移量的结果',
-  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '每篇文章发表时的GMT(格林威治)时间，datetime值',
+  `post_date` datetime DEFAULT '0000-00-00 00:00:00' COMMENT ' 每篇文章发表的时间，datetime值。它是GMT时间加上时区偏移量的结果',
+  `post_date_gmt` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '每篇文章发表时的GMT(格林威治)时间，datetime值',
   `post_content` longtext NOT NULL COMMENT '每篇文章的具体内容，longtext值。你在后台文章编辑页面中写入的所有内容都放在这里。',
   `post_title` text NOT NULL COMMENT ' 文章的标题',
   `post_excerpt` text NOT NULL COMMENT '文章摘要',
@@ -86,11 +86,11 @@ CREATE TABLE IF NOT EXISTS `wp_post` (
   `ping_status` varchar(20) NOT NULL DEFAULT 'open' COMMENT 'ping状态，枚举enum(’open’,’closed’)值，open指打开pingback功能，closed为关闭。默认值是open',
   `post_password` varchar(20) NOT NULL DEFAULT '' COMMENT '文章密码，varchar(20)值。文章编辑才可为文章设定一个密码，凭这个密码才能对文章进行重新强加或修改',
   `post_name` varchar(200) NOT NULL DEFAULT '' COMMENT '文章名，varchar(200)值。这通常是用在生成permalink时，标识某篇文章的一段文本或数字，也即post slug',
-  `to_ping` text NOT NULL COMMENT '强制该文章去ping某个URI',
-  `pinged` text NOT NULL COMMENT ' 该文章被pingback的历史记录，text值，为一个个的URI',
+  `to_ping` text COMMENT '强制该文章去ping某个URI',
+  `pinged` text COMMENT ' 该文章被pingback的历史记录，text值，为一个个的URI',
   `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '文章最后修改的时间，datetime值，它是GMT时间加上时区偏移量的结果',
-  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '文章最后修改的GMT时间，datetime值',
-  `post_content_filtered` longtext NOT NULL,
+  `post_modified_gmt` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '文章最后修改的GMT时间，datetime值',
+  `post_content_filtered` longtext,
   `post_parent_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '文章的上级文章的ID，int(11)值，对应的是wp_posts.ID。默认为0，即没有上级文章',
   `guid` varchar(255) NOT NULL DEFAULT '' COMMENT '这是每篇文章的一个地址，varchar(255)值。默认是这样的形式: http://your.blog.site/?p=1，如果你形成permalink功能，则通常会是: 你的Wordpress站点地址+文章名',
   `menu_order` int(11) NOT NULL DEFAULT '0' COMMENT '不详',
@@ -102,8 +102,7 @@ CREATE TABLE IF NOT EXISTS `wp_post` (
   KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`id`),
   KEY `post_parent` (`post_parent_id`),
   KEY `post_author` (`post_author`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 COMMENT ' 用于保存你所有的文章(posts)的相关信息的表。文章信息表，包括了日志、附件、页面等等信息，是WordPress最重要的一个数据表。';
-
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT=' 用于保存你所有的文章(posts)的相关信息的表。文章信息表，包括了日志、附件、页面等等信息，是WordPress最重要的一个数据表。';
 
 CREATE TABLE IF NOT EXISTS `wp_termmeta` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

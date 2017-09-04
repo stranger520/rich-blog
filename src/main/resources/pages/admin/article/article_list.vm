@@ -20,8 +20,11 @@
             <td>$!post.postType</td>
             <td><dl class="palette palette-firm">$!post.postStatus</dl></td>
             <td>
-                <a href="#" class="btn  btn-block btn-primary">编辑</a>
-                <a href="#" class="btn  btn-block btn-danger">删除</a>
+                <a href="#" class="btn  btn-primary">编辑</a>
+                <a href="#" class="btn  btn-danger">删除</a>
+                #if($!post.postType eq 'draft')
+                    <a href="#" class="btn  btn-danger">发布</a>
+                #end
             </td>
         </tr>
     #end
