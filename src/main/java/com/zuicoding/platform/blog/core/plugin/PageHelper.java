@@ -31,7 +31,7 @@ public class PageHelper implements Interceptor {
 
     public static final ThreadLocal<Pager> localPage = new ThreadLocal<Pager>();
 
-    private IDialect dialect;
+    private IDialect dialect = IDialect.DefaultDialect.MYSQL;
     private static final List<ResultMap> COUNT_RESULTMAPS = new ArrayList<>(1);
 
     private static final String COUNT_SQL_SUFFIX = "-SELECT-COUNT";
@@ -181,16 +181,26 @@ public class PageHelper implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-        if (!properties.containsKey("dialect")){
-            throw new IllegalArgumentException("dialect property is required");
+        if (properties.containsKey("dialect")){
+            String d = properties.getProperty("dialect");
+           try {
+               if (log.isDebugEnabled()){
+                   log.d("dialect value is : {}",d);
+               }
+               IDialect.DefaultDialect defaultDialect = IDialect.DefaultDialect.valueOf(d.toUpperCase());
+           }catch (Exception e){
+               log.w("can't use default dialect value :{}",d);
+               try {
+                   this.dialect = (IDialect) Class.forName(d).newInstance();
+               }catch (Exception e1){
+                   throw new IllegalArgumentException(e1);
+               }
+
+           }
         }
         this.methodSuffix = properties.getProperty("methodSuffix",this.methodSuffix);
         String dialect = properties.getProperty("dialect");
 
-        IDialect.DefaultDialect defaultDialect = IDialect.DefaultDialect.valueOf(dialect.toUpperCase());
-
-        if (defaultDialect == null) throw new IllegalArgumentException("Undefined dialect " + dialect);
-        this.dialect = defaultDialect;
         log.i(" init properties finished, dialect value is : {},methodSuffix",dialect,methodSuffix);
     }
 
