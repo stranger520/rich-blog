@@ -34,10 +34,15 @@
     </ul>
 </nav>
 <script type="text/javascript">
-    $("ul.pagination").pagination(num_entries, {
+    $("ul.pagination").pagination($!pager.pageTotal, {
         num_edge_entries: 1, //边缘页数
-        num_display_entries: 4, //主体页数
-        callback: pageselectCallback,
+        num_display_entries: 5, //主体页数
+        callback: function (pageNum) {
+            pageNum = pageNum + 1;
+            if(pageNum != $!pager.pageNum){
+                query(pageNum);
+            }
+        },
         items_per_page:1 //每页显示1项
     });
 </script>

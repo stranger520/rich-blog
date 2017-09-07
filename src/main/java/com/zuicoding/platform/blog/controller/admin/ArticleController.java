@@ -63,6 +63,7 @@ public class ArticleController {
 
         try {
             model.addAttribute("articles",postService.selectPostByPager(pager,post));
+            model.addAttribute("pager",pager);
         }catch (Exception e){
             log.e("查询文章列表error",e);
         }

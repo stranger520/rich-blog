@@ -1,4 +1,5 @@
 #set($layout = "pages/layout/layout_admin.vm")
+<script type="text/javascript" src="${request.contextPath}/js/pagination/jquery.pagination.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">查询</div>
     <div class="panel-body">

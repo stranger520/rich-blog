@@ -6,6 +6,7 @@
  * @param {int} maxentries Number of entries to paginate
  * @param {Object} opts Several options (see README for documentation)
  * @return {Object} jQuery Object
+ * @description support bootstrap by Stephen.lin modify
  */
 jQuery.fn.pagination = function(maxentries, opts){
     opts = jQuery.extend({
@@ -64,9 +65,15 @@ jQuery.fn.pagination = function(maxentries, opts){
             }
 
             var appendItem = function(page_id, appendopts){
-                // page_id = page_id<0?0:(page_id<np?page_id:np-1); // 鐟欏嫯瀵杙age id閸婏拷
+                // page_id = page_id<0?0:(page_id<np?page_id:np-1);
                 page_id = page_id < 0 ? -1 : page_id;
                 appendopts = jQuery.extend({text:page_id+1, classes:""}, appendopts||{});
+                //处理 头结点
+                if(page_id == -1){
+                    var lnk = jQuery("<li class='disabled'><a href='javascript:void(0);'>"+(appendopts.text)+"</a></li>");
+                    panel.append(lnk);
+                    return;
+                }
                 if(page_id == current_page){
                     var lnk = jQuery("<li class='active'><a href='javascript:void(0);'>"+(appendopts.text)+"</a></li>");
                 }else{
@@ -112,7 +119,7 @@ jQuery.fn.pagination = function(maxentries, opts){
             }
 
             if(opts.next_text && (current_page < np-1 || opts.next_show_always)){
-                appendItem(current_page+1,{text:opts.next_text, classes:"next"});
+                appendItem(current_page+1,{text:opts.next_text, classes:"disabled"});
             }
         }
 
