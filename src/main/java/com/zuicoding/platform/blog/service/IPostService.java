@@ -3,6 +3,7 @@ package com.zuicoding.platform.blog.service;
 import com.zuicoding.platform.blog.base.Pager;
 import com.zuicoding.platform.blog.modal.WpPost;
 import com.zuicoding.platform.blog.modal.WpPostWithBLOBs;
+import com.zuicoding.platform.blog.modal.WpTerm;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface IPostService {
      */
     WpPostWithBLOBs selectPost(int id);
 
-    long createOrUpdate(WpPostWithBLOBs post);
+    long createOrUpdate(WpPostWithBLOBs post,List<WpTerm> terms);
 
     List<WpPost> selectPostByPager(Pager pager,WpPost post);
 }

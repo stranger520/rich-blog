@@ -5,6 +5,7 @@ import com.zuicoding.platform.blog.base.PostEnum;
 import com.zuicoding.platform.blog.base.ResponseResult;
 import com.zuicoding.platform.blog.modal.WpPost;
 import com.zuicoding.platform.blog.modal.WpPostWithBLOBs;
+import com.zuicoding.platform.blog.modal.WpTerm;
 import com.zuicoding.platform.blog.modal.WpUser;
 import com.zuicoding.platform.blog.service.IPostService;
 import com.zuicoding.platform.blog.utils.LogUtil;
@@ -40,7 +41,7 @@ public class ArticleController {
 
     @RequestMapping(value = "/create.json",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult save(WpPostWithBLOBs post, HttpSession session){
+    public ResponseResult save(WpPostWithBLOBs post, WpTerm term, HttpSession session){
         ResponseResult<Long> result = ResponseResult.success();
         try {
            WpUser user= (WpUser) session.getAttribute("user");

@@ -1,10 +1,12 @@
 #set($layout = "pages/layout/layout_admin.vm")
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/style/editermd/editormd.min.css">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/style/tagsinput/bootstrap-tagsinput.css">
 <script type="text/javascript" src="${request.contextPath}/js/editermd/editormd.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/tagsinput/bootstrap-tagsinput.min.js"></script>
 <form id="form" class="form-horizontal">
     <div  class="form-group">
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" placeholder="title" name="postTitle">
+            <input type="text" class="form-control" id="title" placeholder="文章标题" name="postTitle">
         </div>
         <div class="btn-group col-sm-2" style="float: right;margin-bottom: 0.5em;">
             <button type="button" class="btn btn-info" id="saveBtn">保存草稿</button>
@@ -17,6 +19,12 @@
                 <li onclick="select(this,1,'发布文章');"><a href="#" >发布文章</a></li>
             </ul>
         </div>
+        <div class="col-sm-6" style="    margin-top: 0.5em;">
+            <input type="text" class="form-control" id="tags" placeholder="文章标签" name="tags">
+        </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="title" placeholder="文章分类" name="postTitle">
+        </div>
     </div>
 <div id="editormd">
     <textarea name="postExcerpt" id="editormd-doc" style="display: none;"></textarea>
@@ -28,10 +36,12 @@
 <script type="text/javascript">
     _EFFECT_MENU_ROLE_ = "deploy-article";
     var editorMd,postId = null;
+
     function select(obj,status,text) {
         $(obj).parent().prev().prev().text(text).data("status",status);
     }
     $(function() {
+        $("#tags").tagsinput().prev().addClass("col-sm-12");
         editorMd = editormd("editormd", {
             toolbarAutoFixed:false,
             width   : "100%",

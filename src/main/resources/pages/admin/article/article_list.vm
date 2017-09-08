@@ -1,7 +1,7 @@
 #set($layout = "pages/layout/layout_bank.vm")
 <table class="table table-hover">
     <tr>
-        <td>文章标题</td>
+        <td style="width: 10%;">文章标题</td>
         <td>浏览量</td>
         <td>评论数</td>
         <td>最后修改时间</td>

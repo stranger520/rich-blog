@@ -114,25 +114,23 @@ CREATE TABLE IF NOT EXISTS `wp_termmeta` (
   KEY `meta_key` (`meta_key`(191))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 COMMENT '分类与文章信息表（wp_posts）、链接表(wp_links)的关联表';
 
-CREATE TABLE IF NOT EXISTS `wp_term` (
+CREATE TABLE `wp_term` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL DEFAULT '',
-  `slug` varchar(200) NOT NULL DEFAULT '',
+  `name` varchar(200) NOT NULL DEFAULT '' COMMENT '分类名',
+  `slug` varchar(200) NOT NULL DEFAULT '' COMMENT '缩略名',
   `term_group` bigint(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `slug` (`slug`(191)),
   KEY `name` (`name`(191))
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 COMMENT '文章分类、链接分类、标签的信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章分类、链接分类、标签的信息表';
 
-
-CREATE TABLE IF NOT EXISTS `wp_term_relationship` (
-  `id` bigint(20) unsigned NOT NULL DEFAULT '0',
+CREATE TABLE `wp_term_relationship` (
+  `object_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '对应文章ID/链接ID',
   `term_taxonomy_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `term_order` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`term_taxonomy_id`),
+  PRIMARY KEY (`object_id`,`term_taxonomy_id`),
   KEY `term_taxonomy_id` (`term_taxonomy_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '分类与文章信息表（wp_post）、链接表(wp_link)的关联表';
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分类与文章信息表（wp_post）、链接表(wp_link)的关联表';
 
 CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

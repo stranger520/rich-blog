@@ -4,11 +4,14 @@ import com.zuicoding.platform.blog.base.Pager;
 import com.zuicoding.platform.blog.core.UserHolder;
 import com.zuicoding.platform.blog.core.plugin.PageHelper;
 import com.zuicoding.platform.blog.dao.WpPostMapper;
+import com.zuicoding.platform.blog.dao.WpTermMapper;
 import com.zuicoding.platform.blog.modal.WpPost;
 import com.zuicoding.platform.blog.modal.WpPostWithBLOBs;
+import com.zuicoding.platform.blog.modal.WpTerm;
 import com.zuicoding.platform.blog.modal.WpUser;
 import com.zuicoding.platform.blog.service.IPostService;
 import com.zuicoding.platform.blog.utils.LogUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +31,9 @@ public class PostServiceImpl implements IPostService {
 
     @Autowired
     private WpPostMapper wpPostMapper;
+
+    @Autowired
+    private WpTermMapper wpTermMapper;
     /**
      * 本周热榜
      *
@@ -50,10 +56,20 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Transactional
-    public long createOrUpdate(WpPostWithBLOBs post){
+    public long createOrUpdate(WpPostWithBLOBs post,List<WpTerm> terms){
         post.setPostModified(new Date());
         if (post.getId() == null || post.getId() == 0){
             wpPostMapper.insertSelective(post) ;
+            if (CollectionUtils.isNotEmpty(terms)){
+                for (WpTerm term : terms) {
+                    try {
+                        term.setSlug(term.getName());
+                        wpTermMapper.insertSelective(term);
+                    }catch (Exception e){
+                        log.w(String.format("%s term name has exists", term.getName()));
+                    }
+                }
+            }
             return post.getId();
         }
         wpPostMapper.updateByPrimaryKeySelective( post);
