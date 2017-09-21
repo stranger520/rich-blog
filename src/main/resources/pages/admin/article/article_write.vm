@@ -41,7 +41,8 @@
         $(obj).parent().prev().prev().text(text).data("status",status);
     }
     $(function() {
-        $("#tags").tagsinput().prev().addClass("col-sm-12");
+        $("#tags").tagsinput();
+        $("#tags").prev().addClass("col-sm-12");
         editorMd = editormd("editormd", {
             toolbarAutoFixed:false,
             width   : "100%",

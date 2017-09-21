@@ -46,7 +46,7 @@ public class ArticleController {
         try {
            WpUser user= (WpUser) session.getAttribute("user");
            post.setPostAuthor(user.getId());
-            long id = postService.createOrUpdate(post);
+            long id = postService.createOrUpdate(post,null);
             result.setData(id).setSuccess(true);
         }catch (Exception e){
             log.e("保存文章失败",e);
